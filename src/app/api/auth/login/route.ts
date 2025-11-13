@@ -4,6 +4,9 @@ import prisma from '@/app/lib/db'
 import { verifyPassword, createToken } from '@/app/lib/auth'
 import { checkRateLimit, getIdentifier } from '@/app/lib/rate-limit'
 
+// 🔥 CRITICAL: Add Node.js runtime
+export const runtime = 'nodejs'
+
 const MAX_FAILED_ATTEMPTS = 5
 const LOCK_DURATION = 15 * 60 * 1000 // 15 minutes
 

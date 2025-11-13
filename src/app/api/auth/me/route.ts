@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server'
 import { getSession } from '@/app/lib/auth'
 import prisma from '@/app/lib/db'
 
+// 🔥 CRITICAL: Add Node.js runtime
+export const runtime = 'nodejs'
+
 export async function GET() {
   try {
     const session = await getSession()
@@ -19,6 +22,7 @@ export async function GET() {
         name: true,
         role: true,
         avatar: true,
+        emailVerified: true,
       },
     })
 

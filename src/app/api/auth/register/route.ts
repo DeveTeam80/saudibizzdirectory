@@ -7,6 +7,9 @@ import { validateEmail, validatePassword } from '@/app/lib/validators'
 import { sendVerificationEmail } from '@/app/lib/email'
 import { checkRateLimit, getIdentifier } from '@/app/lib/rate-limit'
 
+// 🔥 CRITICAL: Add Node.js runtime
+export const runtime = 'nodejs'
+
 export async function POST(request: NextRequest) {
   const identifier = getIdentifier(request)
 
@@ -56,15 +59,14 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingUser) {
-    // ✅ CHANGED: Return a 409 Conflict with a specific error code
-    return NextResponse.json(
-      {
-        error: 'An account with this email already exists.',
-        errorCode: 'USER_ALREADY_EXISTS'
-      },
-      { status: 409 } // Use 409 Conflict
-    )
-  }
+      return NextResponse.json(
+        {
+          error: 'An account with this email already exists.',
+          errorCode: 'USER_ALREADY_EXISTS'
+        },
+        { status: 409 }
+      )
+    }
 
     const hashedPassword = await hashPassword(password)
 
@@ -79,7 +81,7 @@ export async function POST(request: NextRequest) {
         password: hashedPassword,
         name,
         role: 'user',
-        emailVerified: false, // 🔥 Not verified yet
+        emailVerified: false,
         verificationToken,
         verificationExpiry,
       },
@@ -97,10 +99,8 @@ export async function POST(request: NextRequest) {
 
     if (!emailResult.success) {
       console.error('Failed to send verification email:', emailResult.error)
-      // Don't fail registration, user can request resend
     }
 
-    // 🔥 Don't auto-login, require email verification
     return NextResponse.json({
       success: true,
       message: 'Registration successful! Please check your email to verify your account.',

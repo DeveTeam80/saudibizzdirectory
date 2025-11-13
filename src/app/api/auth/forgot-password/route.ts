@@ -6,6 +6,9 @@ import { sendPasswordResetEmail } from '@/app/lib/email'
 import { checkRateLimit, getIdentifier } from '@/app/lib/rate-limit'
 import { validateEmail } from '@/app/lib/validators'
 
+// 🔥 CRITICAL: Add Node.js runtime
+export const runtime = 'nodejs'
+
 export async function POST(request: NextRequest) {
   const identifier = getIdentifier(request)
 
@@ -65,7 +68,6 @@ export async function POST(request: NextRequest) {
 
     if (!emailResult.success) {
       console.error('Failed to send password reset email:', emailResult.error)
-      // Don't fail the request, just log it
     }
 
     return NextResponse.json({
