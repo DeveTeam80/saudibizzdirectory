@@ -1,14 +1,18 @@
 // src/app/dashboard/layout.tsx
 import React from 'react'
+import { protectRoute } from '@/app/lib/auth-protection'
 import AdminNavbar from '@/app/components/navbar/admin-navbar'
 import AdminSidebar from '@/app/components/admin/admin-sidebar'
 import BackToTop from '@/app/components/back-to-top'
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // 🔥 Protect this route - redirects to /login if not authenticated
+  const session = await protectRoute()
+
   return (
     <>
       <AdminNavbar />
