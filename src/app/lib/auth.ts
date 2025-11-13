@@ -1,18 +1,20 @@
 // src/app/lib/auth.ts
 import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
-import bcrypt from 'bcryptjs'
+import { hashSync, verifySync } from '@node-rs/bcrypt'
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || 'your-secret-key'
 )
 
-export async function hashPassword(password: string) {
-  return await bcrypt.hash(password, 10)
+// ✅ Now synchronous (no await needed)
+export function hashPassword(password: string): string {
+  return hashSync(password, 10)
 }
 
-export async function verifyPassword(password: string, hashedPassword: string) {
-  return await bcrypt.compare(password, hashedPassword)
+// ✅ Now synchronous (no await needed)
+export function verifyPassword(password: string, hashedPassword: string): boolean {
+  return verifySync(password, hashedPassword)
 }
 
 export async function createToken(payload: { 
