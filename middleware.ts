@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { verifyToken } from './src/app/lib/auth'
 
+// 🔥 CRITICAL: Set runtime to nodejs to support bcryptjs and other Node.js modules
+export const runtime = 'nodejs'
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const response = NextResponse.next()
@@ -22,11 +25,12 @@ export async function middleware(request: NextRequest) {
       'Content-Security-Policy',
       [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://app.visionarybizz.com",
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https: blob:",
-        "connect-src 'self' https://res.cloudinary.com",
+        "connect-src 'self' https://res.cloudinary.com https://app.visionarybizz.com",
+        "frame-src 'self' https://app.visionarybizz.com",
         "frame-ancestors 'self'"
       ].join('; ')
     )
@@ -41,10 +45,16 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login?redirect=/dashboard', request.url))
     }
 
-    const payload = await verifyToken(token.value)
-    if (!payload) {
+    try {
+      const payload = await verifyToken(token.value)
+      if (!payload) {
+        const redirectResponse = NextResponse.redirect(new URL('/login?redirect=/dashboard', request.url))
+        // Clear invalid token
+        redirectResponse.cookies.delete('auth-token')
+        return redirectResponse
+      }
+    } catch (error) {
       const redirectResponse = NextResponse.redirect(new URL('/login?redirect=/dashboard', request.url))
-      // Clear invalid token
       redirectResponse.cookies.delete('auth-token')
       return redirectResponse
     }
@@ -56,24 +66,35 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login?redirect=/admin', request.url))
     }
 
-    const payload = await verifyToken(token.value)
-    if (!payload) {
+    try {
+      const payload = await verifyToken(token.value)
+      if (!payload) {
+        const redirectResponse = NextResponse.redirect(new URL('/login?redirect=/admin', request.url))
+        redirectResponse.cookies.delete('auth-token')
+        return redirectResponse
+      }
+
+      if (payload.role !== 'admin') {
+        return NextResponse.redirect(new URL('/dashboard', request.url))
+      }
+    } catch (error) {
       const redirectResponse = NextResponse.redirect(new URL('/login?redirect=/admin', request.url))
       redirectResponse.cookies.delete('auth-token')
       return redirectResponse
-    }
-
-    if (payload.role !== 'admin') {
-      return NextResponse.redirect(new URL('/dashboard', request.url))
     }
   }
 
   // 🔐 Redirect logged-in users away from auth pages
   if (token && (pathname === '/login' || pathname === '/register')) {
-    const payload = await verifyToken(token.value)
-    if (payload) {
-      const destination = payload.role === 'admin' ? '/admin/dashboard' : '/dashboard'
-      return NextResponse.redirect(new URL(destination, request.url))
+    try {
+      const payload = await verifyToken(token.value)
+      if (payload) {
+        const destination = payload.role === 'admin' ? '/admin/dashboard' : '/dashboard'
+        return NextResponse.redirect(new URL(destination, request.url))
+      }
+    } catch (error) {
+      // Token invalid, clear it and let user proceed to login/register
+      response.cookies.delete('auth-token')
     }
   }
 
@@ -89,6 +110,6 @@ export const config = {
      * - /_next/image (image optimization)
      * - /favicon.ico, /robots.txt, etc.
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|assets).*)',
   ],
 }
