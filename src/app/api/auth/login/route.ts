@@ -4,18 +4,16 @@ import prisma from '@/app/lib/db'
 import { verifyPassword, createToken } from '@/app/lib/auth'
 import { checkRateLimit, getIdentifier } from '@/app/lib/rate-limit'
 
-// 🔥 CRITICAL: Add Node.js runtime
 export const runtime = 'nodejs'
 
 const MAX_FAILED_ATTEMPTS = 5
-const LOCK_DURATION = 15 * 60 * 1000 // 15 minutes
+const LOCK_DURATION = 15 * 60 * 1000
 
 export async function POST(request: NextRequest) {
   const identifier = getIdentifier(request)
   const clientIp = request.headers.get('x-forwarded-for') || 'unknown'
 
   try {
-    // 🔥 Rate limiting: 10 login attempts per 15 minutes
     const rateLimit = checkRateLimit(`login-${identifier}`, {
       limit: 10,
       windowMs: 900000
@@ -48,7 +46,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 🔥 Check if account is locked
     if (user.accountLockedUntil && user.accountLockedUntil > new Date()) {
       const minutesRemaining = Math.ceil((user.accountLockedUntil.getTime() - Date.now()) / 60000)
       
@@ -62,7 +59,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 🔥 Check if email is verified
     if (!user.emailVerified) {
       return NextResponse.json(
         { 
@@ -74,11 +70,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Verify password
-    const passwordMatch = await verifyPassword(password, user.password)
+    // ✅ CHANGED: No await needed
+    const passwordMatch = verifyPassword(password, user.password)
 
     if (!passwordMatch) {
-      // 🔥 Increment failed attempts
       const failedAttempts = user.failedLoginAttempts + 1
       const shouldLock = failedAttempts >= MAX_FAILED_ATTEMPTS
 
@@ -111,7 +106,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 🔥 Reset failed attempts and update last login
     await prisma.user.update({
       where: { id: user.id },
       data: {
@@ -122,7 +116,6 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Create token
     const token = await createToken({
       userId: user.id,
       email: user.email,
@@ -145,7 +138,7 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: 60 * 60 * 24 * 7,
     })
 
     return response

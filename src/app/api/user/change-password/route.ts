@@ -1,14 +1,17 @@
 // src/app/api/user/change-password/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/app/lib/db'
-import { requireAuth } from '@/app/lib/auth'
-import bcrypt from 'bcryptjs'
+import { requireAuth, verifyPassword, hashPassword } from '@/app/lib/auth'
+import { validatePassword } from '@/app/lib/validators'
+
+export const runtime = 'nodejs'
 
 export async function PUT(request: NextRequest) {
   try {
     const session = await requireAuth()
     const { currentPassword, newPassword } = await request.json()
 
+    // Validate input
     if (!currentPassword || !newPassword) {
       return NextResponse.json(
         { error: 'Current password and new password are required' },
@@ -16,9 +19,11 @@ export async function PUT(request: NextRequest) {
       )
     }
 
-    if (newPassword.length < 6) {
+    // Validate new password strength
+    const passwordValidation = validatePassword(newPassword)
+    if (!passwordValidation.valid) {
       return NextResponse.json(
-        { error: 'New password must be at least 6 characters' },
+        { error: passwordValidation.error },
         { status: 400 }
       )
     }
@@ -35,8 +40,8 @@ export async function PUT(request: NextRequest) {
       )
     }
 
-    // Verify current password
-    const isValid = await bcrypt.compare(currentPassword, user.password)
+    // ✅ CHANGED: Use verifyPassword (no await needed)
+    const isValid = verifyPassword(currentPassword, user.password)
     if (!isValid) {
       return NextResponse.json(
         { error: 'Current password is incorrect' },
@@ -44,20 +49,45 @@ export async function PUT(request: NextRequest) {
       )
     }
 
-    // Hash new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10)
+    // ✅ CHANGED: Check if new password is same as old
+    const isSamePassword = verifyPassword(newPassword, user.password)
+    if (isSamePassword) {
+      return NextResponse.json(
+        { error: 'New password must be different from your current password' },
+        { status: 400 }
+      )
+    }
 
-    // Update password
+    // ✅ CHANGED: Use hashPassword (no await needed)
+    const hashedPassword = hashPassword(newPassword)
+
+    // Update password and reset any account locks
     await prisma.user.update({
       where: { id: user.id },
-      data: { password: hashedPassword },
+      data: { 
+        password: hashedPassword,
+        failedLoginAttempts: 0,
+        accountLockedUntil: null,
+      },
     })
 
-    return NextResponse.json({ success: true, message: 'Password changed successfully' })
+    return NextResponse.json({ 
+      success: true, 
+      message: 'Password changed successfully' 
+    })
   } catch (error: any) {
     console.error('Change password error:', error)
+    
+    // Handle unauthorized error
+    if (error.message === 'Unauthorized') {
+      return NextResponse.json(
+        { error: 'Please log in to change your password' },
+        { status: 401 }
+      )
+    }
+
     return NextResponse.json(
-      { error: error.message || 'Failed to change password' },
+      { error: 'Failed to change password. Please try again.' },
       { status: 500 }
     )
   }

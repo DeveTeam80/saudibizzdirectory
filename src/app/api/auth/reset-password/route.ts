@@ -4,7 +4,6 @@ import prisma from '@/app/lib/db'
 import { hashPassword, verifyPassword } from '@/app/lib/auth'
 import { validatePassword } from '@/app/lib/validators'
 
-// 🔥 CRITICAL: Add Node.js runtime
 export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
@@ -18,7 +17,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate password strength
     const passwordValidation = validatePassword(password)
     if (!passwordValidation.valid) {
       return NextResponse.json(
@@ -27,7 +25,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Find user with valid token
     const user = await prisma.user.findFirst({
       where: {
         resetToken: token,
@@ -44,8 +41,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if new password is same as old
-    const isSamePassword = await verifyPassword(password, user.password)
+    // ✅ CHANGED: No await needed
+    const isSamePassword = verifyPassword(password, user.password)
     if (isSamePassword) {
       return NextResponse.json(
         { error: 'New password must be different from your old password.' },
@@ -53,8 +50,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Hash new password and update
-    const hashedPassword = await hashPassword(password)
+    // ✅ CHANGED: No await needed
+    const hashedPassword = hashPassword(password)
 
     await prisma.user.update({
       where: { id: user.id },

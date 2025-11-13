@@ -7,14 +7,12 @@ import { validateEmail, validatePassword } from '@/app/lib/validators'
 import { sendVerificationEmail } from '@/app/lib/email'
 import { checkRateLimit, getIdentifier } from '@/app/lib/rate-limit'
 
-// 🔥 CRITICAL: Add Node.js runtime
 export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
   const identifier = getIdentifier(request)
 
   try {
-    // 🔥 Rate limiting: 5 registrations per hour
     const rateLimit = checkRateLimit(`register-${identifier}`, {
       limit: 5,
       windowMs: 3600000
@@ -29,7 +27,6 @@ export async function POST(request: NextRequest) {
 
     const { email, password, name } = await request.json()
 
-    // 🔥 Validation
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
@@ -53,7 +50,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     })
@@ -68,13 +64,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const hashedPassword = await hashPassword(password)
+    // ✅ CHANGED: No await needed
+    const hashedPassword = hashPassword(password)
 
-    // 🔥 Generate verification token
     const verificationToken = randomBytes(32).toString('hex')
-    const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
+    const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000)
 
-    // 🔥 Create user (unverified)
     const user = await prisma.user.create({
       data: {
         email: email.toLowerCase(),
@@ -94,7 +89,6 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // 🔥 Send verification email
     const emailResult = await sendVerificationEmail(user.email, verificationToken)
 
     if (!emailResult.success) {
