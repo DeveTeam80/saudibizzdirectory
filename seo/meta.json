@@ -1,0 +1,147 @@
+{
+  "home": {
+    "title": "Best Business Listing Directory in Saudi Arabia | Find Top Rated Companies | Saudi Bizz Directory",
+    "description": "Search Saudi Arabia's best business Listing directory. Saudi Bizz Directory offers verified listings, customer reviews, & contacts for the top companies, clinics, & services. Find trusted businesses fast.",
+    "keywords": "Saudi Arabia business directory,business listings Saudi Arabia,Saudi businesses,Saudi companies,Saudi services,verified businesses Saudi Arabia,local business directory,Saudi companies directory,Saudi commercial guide,Online directory Saudi Arabia,Saudi local business directory,Business guide Saudi Arabia,Companies in Saudi Arabia,List of companies in Saudi Arabia,Find businesses in Saudi Arabia,Saudi company listings",
+    "canonical": "https://www.saudibizzdirectory.com/",
+    "ogImage": "/assets/img/logo/og-home.png",
+    "ogTitle": "Top Business Listing Directory in Saudi Arabia | Saudi Bizz Directory",
+    "ogDescription": "Tired of outdated info? Find the top-rated and most reliable businesses in Saudi Arabia. From top restaurants to verified contractors, Saudi Bizz Directory is your #1 source.",
+    "ogType": "website",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow"
+  },
+  "home_ar": {
+    "title": "أفضل دليل أعمال في السعودية | شركات موثقة | سعودي بـِز دايركتوري",
+    "description": "ابحث في أفضل دليل أعمال بالسعودية. سعودي بـِز دايركتوري يقدم قوائم موثقة، تقييمات عملاء، وبيانات اتصال لأبرز الشركات والعيادات والخدمات. اعثر على الأفضل بسرعة.",
+    "keywords": "دليل شركات السعودية, الدليل التجاري السعودي, دليل السعودية اون لاين, دليل الأعمال المحلي في السعودية, دليل أعمال السعودية, شركات في السعودية, قائمة شركات السعودية, البحث عن شركات في السعودية, قوائم شركات السعودية",
+    "canonical": "https://www.saudibizzdirectory.com/ar",
+    "ogImage": "/assets/img/logo/og-home.png",
+    "ogTitle": "سعودي بـِز دايركتوري: الدليل الأفضل والأكثر ثقة للشركات في السعودية",
+    "ogDescription": "هل تبحث عن الأفضل؟ اعثر على أعلى الشركات تقييماً والأكثر ثقة في السعودية. من أفضل المطاعم إلى المقاولين المعتمدين، سعودي بـِز دايركتوري هو دليلك الأول.",
+    "ogType": "website",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow"
+  },
+  "about": {
+    "title": "About Us - Saudi Bizz Directory",
+    "description": "Learn about Saudi Bizz Directory - your gateway to discovering trusted businesses across Saudi Arabia.",
+    "keywords": "about Saudi Bizz Directory,business directory Saudi Arabia,local businesses Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/about",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow"
+  },
+  "digitalMarketing": {
+    "title": "Digital Marketing Services in Saudi Arabia | Saudi Bizz Agency",
+    "description": "Leading digital marketing agency in Saudi Arabia offering SEO, social media marketing, online advertising, and business directory listings. Grow your business across all 13 provinces.",
+    "keywords": "digital marketing saudi arabia, seo saudi arabia, social media marketing saudi arabia, online advertising saudi arabia, saudi marketing agency, business directory saudi arabia, digital agency riyadh",
+    "canonical": "https://saudibizzdirectory.com/services/digital-marketing",
+    "ogTitle": "Saudi Arabia's Premier Digital Marketing Agency | Saudi Bizz",
+    "ogDescription": "Professional digital marketing services including SEO, social media, and advertising. Helping Saudi businesses grow online with bilingual Arabic-English expertise.",
+    "ogImage": "/img/services/digital-marketing-og.jpg",
+    "ogType": "website",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow",
+    "aiAgent": {
+      "intent": "commercial",
+      "entities": [
+        "Saudi Bizz",
+        "digital marketing",
+        "SEO Saudi Arabia",
+        "social media marketing",
+        "online advertising",
+        "business directory"
+      ],
+      "topics": [
+        "digital marketing services",
+        "saudi marketing agency",
+        "seo optimization",
+        "social media management",
+        "online advertising",
+        "business growth"
+      ],
+      "conversationalHooks": [
+        "What digital marketing services do you offer in Saudi Arabia?",
+        "How can I improve my business visibility online in Saudi Arabia?",
+        "What are your SEO services for Saudi businesses?",
+        "How much does digital marketing cost in Saudi Arabia?"
+      ]
+    }
+  },
+  "all-listings": {
+    "title": "All Business Listings in Saudi Arabia | Saudi Bizz Directory",
+    "description": "Browse all verified business listings across Saudi Arabia. Find companies, services, and suppliers in Riyadh, Jeddah, and other cities.",
+    "keywords": "all business listings Saudi Arabia,Saudi companies,business directory,verified listings",
+    "canonical": "https://www.saudibizzdirectory.com/all-listings",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow"
+  },
+  "shops-suppliers": {
+    "title": "Shops and Suppliers in Saudi Arabia | Retail & Wholesale Directory",
+    "description": "Find Top Shops & Suppliers in Saudi Arabia - Verified Listings for Retail, Wholesale & More. Connect with trusted suppliers nationwide.",
+    "keywords": "shops Saudi Arabia,suppliers Saudi Arabia,retail directory,wholesale suppliers Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/shops-and-suppliers/main",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow"
+  },
+  "global-listings": {
+    "title": "Global Business Listings | International Companies & Services",
+    "description": "Explore international business listings. Find companies and services across countries with contact details and categories.",
+    "keywords": "global business directory,international listings,worldwide companies,global services",
+    "canonical": "https://www.saudibizzdirectory.com/global-listings",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow"
+  },
+  "add-listing": {
+    "title": "Add Your Business | List on Saudi Bizz Directory",
+    "description": "Submit your business to Saudi Bizz Directory. Get discovered by customers searching for services near them.",
+    "keywords": "add business Saudi Arabia,submit listing,business sign up,list company Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/add-listing",
+    "author": "Saudi Bizz Directory",
+    "robots": "noindex, follow"
+  },
+  "manufacturing": {
+    "title": "Listing Directory for Manufacturers in Saudi Arabia | Saudibizz Directory",
+    "description": "Discover Saudi Arabia's top business directory for finding and connecting with reliable manufacturers, real estate firms, and service providers.",
+    "keywords": "manufacturers Saudi Arabia,industrial suppliers Saudi Arabia,manufacturing directory Saudi Arabia,manufacturing companies Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/listings/manufacturing",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow",
+    "ogTitle": "Saudi Arabia's Best Listing Directory For Manufacturers | Saudibizz Directory",
+    "ogDescription": "Explore verified business listings across Saudi Arabia. From manufacturing to real estate, find and connect with industry leaders with ease.",
+    "ogType": "website"
+  },
+  "real-estate": {
+    "title": "Best Real Estate Listing Directory in Saudi Arabia | Saudibizz Directory",
+    "description": "Discover Saudi Arabia's top real estate directory for buying, renting, or selling property. Search listings for homes, land, apartments, and commercial spaces across the country.",
+    "keywords": "real estate Saudi Arabia,property listings Saudi Arabia,buy house Saudi Arabia,rent apartments Saudi Arabia,land for sale Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/listings/real-estate",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow",
+    "ogTitle": "Saudi Arabia's #1 Real Estate Directory - Find Your Ideal Property",
+    "ogDescription": "Explore verified property listings across Saudi Arabia. From homes to commercial spaces, find and connect with real estate agents, sellers, and landlords with ease.",
+    "ogType": "website"
+  },
+  "services": {
+    "title": "Top Service Industry Listing Directory in Saudi Arabia | Saudibizz Directory",
+    "description": "Find the best professional services in Saudi Arabia. Browse our directory for trusted financial advisors, travel agencies, and more.",
+    "keywords": "services Saudi Arabia,professional services Saudi Arabia,advisory firms Saudi Arabia,tour operators Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/listings/services",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow",
+    "ogTitle": "Professional Services Directory in Saudi Arabia | Saudibizz",
+    "ogDescription": "Connect with leading service providers in Saudi Arabia. From financial and advisory firms to expert tour operators, find the partner you need.",
+    "ogType": "website"
+  },
+  "shops-and-suppliers": {
+    "title": "Top Shops & Suppliers in Saudi Arabia | Saudibizz Directory",
+    "description": "Find the best shops, hardware stores, electronics suppliers, and more in Saudi Arabia. Browse our directory for quality products and trusted vendors.",
+    "keywords": "shops Saudi Arabia,suppliers Saudi Arabia,hardware Saudi Arabia,electronics suppliers Saudi Arabia",
+    "canonical": "https://www.saudibizzdirectory.com/listings/shops-and-suppliers",
+    "author": "Saudi Bizz Directory",
+    "robots": "index, follow",
+    "ogTitle": "Shops & Suppliers Directory - Saudi Arabia | Saudibizz",
+    "ogDescription": "Connect with leading suppliers in Saudi Arabia. From hardware and electronics to apparel, find everything you need on Saudibizz Directory.",
+    "ogType": "website"
+  }
+}
