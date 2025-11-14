@@ -1,24 +1,24 @@
-// /seo/config.ts
+// seo/config.ts
 export const seoConfig = {
   // Site Identity
   siteName: "Saudi Bizz Directory",
-  defaultTitle: "Top Business Listing Directory in Saudi Arabia | Saudi Bizz Directory",
+  defaultTitle: "Best Business Listing Directory in Saudi Arabia | Find Top Rated Companies | Saudi Bizz Directory",
   titleTemplate: "%s | Saudi Bizz Directory", 
-  defaultDescription: "Find trusted businesses across Saudi Arabia with our comprehensive business directory. Discover contacts, locations, reviews, and services from Riyadh to Jeddah across all 13 regions.",
-  siteUrl: "https://www.saudibizzdirectory.com", // Update with your actual domain
+  defaultDescription: "Search Saudi Arabia's best business listing directory. Saudi Bizz Directory offers verified listings, customer reviews, & contacts for top companies, clinics, & services in KSA. Find trusted businesses fast.",
+  siteUrl: "https://www.saudibizzdirectory.com",
   defaultOgImage: "/assets/img/logo/og-default.png",
   twitterHandle: "@saudibizzdirectory",
   defaultAuthor: "Saudi Bizz Directory",
   
   // Localization
-  defaultLocale: "en_SA", // English (Saudi Arabia)
-  supportedLocales: ["en_SA", "ar_SA"], // English and Arabic support for Saudi Arabia
+  defaultLocale: "en_SA",
+  supportedLocales: ["en_SA", "ar_SA"],
   
   // SEO Defaults
   defaultRobots: "index, follow",
   defaultOgType: "website",
   
-  // Regional Keywords (for SEO optimization)
+  // Regional Keywords
   regionalKeywords: [
     "Saudi Arabia business directory",
     "businesses in Riyadh",
@@ -35,7 +35,7 @@ export const seoConfig = {
   // Analytics
   analytics: {
     googleAnalytics: {
-      measurementId: "G-XXXXXXXXXX", // Replace with your Saudi Bizz GA4 ID
+      measurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-XXXXXXXXXX",
     },
     googleTagManager: {
       containerId: process.env.NEXT_PUBLIC_GTM_CONTAINER_ID,
@@ -54,24 +54,24 @@ export const seoConfig = {
     twitter: "https://twitter.com/saudibizzdirectory",
     instagram: "https://instagram.com/saudibizzdirectory",
     linkedin: "https://linkedin.com/company/saudibizzdirectory",
-    tiktok: "https://tiktok.com/@saudibizzdirectory", // Popular in Saudi Arabia
-    snapchat: "https://snapchat.com/add/saudibizzdirectory", // Very popular in Saudi Arabia
+    tiktok: "https://tiktok.com/@saudibizzdirectory",
+    snapchat: "https://snapchat.com/add/saudibizzdirectory",
   },
   
-  // Business Information (for structured data)
+  // Business Information
   business: {
     name: "Saudi Bizz Directory",
     legalName: "Saudi Bizz Directory",
     description: "Saudi Arabia's premier business directory connecting customers with trusted businesses across all 13 regions",
     address: {
-      streetAddress: "", // Add when available
+      streetAddress: "",
       addressLocality: "Riyadh",
       addressRegion: "Riyadh Region",
       postalCode: "",
       addressCountry: "SA"
     },
     contactPoint: {
-      telephone: "+966-XX-XXX-XXXX", // Add your phone number
+      telephone: "+966-XX-XXX-XXXX",
       contactType: "customer support",
       availableLanguage: ["English", "Arabic"]
     }
@@ -115,5 +115,4 @@ export const seoConfig = {
   }
 };
 
-// Type export for better TypeScript support
 export type SEOConfig = typeof seoConfig;
