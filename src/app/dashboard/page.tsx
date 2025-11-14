@@ -123,7 +123,7 @@ export default function DashboardPage() {
         <div className="row align-items-start g-4">
           <div className="col-xl-12 col-lg-12 col-md-12">
             <p className="text-muted m-0">
-              © {new Date().getFullYear()} Saudi Bizz. Developed with <FaHeart className="ms-1 text-danger" /> By Visionary Services
+              © {new Date().getFullYear()} Kuwait Bizz. Developed with <FaHeart className="ms-1 text-danger" /> By Visionary Services
             </p>
           </div>
         </div>

@@ -5,9 +5,6 @@ import prisma from '@/app/lib/db'
 import { sendVerificationEmail } from '@/app/lib/email'
 import { checkRateLimit, getIdentifier } from '@/app/lib/rate-limit'
 
-// 🔥 CRITICAL: Add Node.js runtime
-export const runtime = 'nodejs'
-
 export async function POST(request: NextRequest) {
   const identifier = getIdentifier(request)
 
@@ -38,7 +35,7 @@ export async function POST(request: NextRequest) {
       where: { email: email.toLowerCase() }
     })
 
-    // Don't reveal if email exists
+    // Don't reveal if email exists (security)
     if (!user) {
       return NextResponse.json({
         success: true,

@@ -3,9 +3,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/app/lib/db'
 import { sendWelcomeEmail } from '@/app/lib/email'
 
-// 🔥 CRITICAL: Add Node.js runtime
-export const runtime = 'nodejs'
-
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)

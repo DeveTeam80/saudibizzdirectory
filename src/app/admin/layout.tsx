@@ -1,14 +1,18 @@
 // src/app/admin/layout.tsx
 import React from 'react'
+import { protectAdminRoute } from '@/app/lib/auth-protection'
 import AdminNavbar from '@/app/components/navbar/admin-navbar'
 import AdminSidebar from '@/app/components/admin/admin-sidebar'
 import BackToTop from '@/app/components/back-to-top'
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // 🔥 Protect this route - redirects if not admin
+  const session = await protectAdminRoute()
+
   return (
     <>
       <AdminNavbar />

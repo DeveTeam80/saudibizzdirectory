@@ -145,7 +145,7 @@ function LoginForm() {
                       src='/img/logo/logoa.png'
                       width={120}
                       height={120}
-                      alt="Saudi Bizz Logo"
+                      alt="Kuwait Bizz Logo"
                       priority
                       style={{ transition: 'transform 0.3s ease' }}
                       onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
